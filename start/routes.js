@@ -15,6 +15,7 @@ Route
 Route
   .group(() => {
     Route.post('/product/:id/images', 'ImageProductController.store')
+    Route.post('/order/:id/addproduct', 'OrderController.product')
     Route.get('/image/:path', 'ImageProductController.show')
     Route.post('/category/:id/images', 'ImageCategoryController.store')
     Route.get('/image/:path', 'ImageCategoryController.show')
