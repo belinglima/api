@@ -1,1 +1,1 @@
-web: ENV_SILENT=true adonis serve
+web: npm start
