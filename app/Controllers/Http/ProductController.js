@@ -20,7 +20,7 @@ class ProductController {
    * POST product
    */
   // async store ({ request, response }) {}
-  async store ({ request, response }) {
+  async store ({ auth, request, response }) {
     const data = request.only([
       "category_id",
       "name", 
@@ -38,7 +38,7 @@ class ProductController {
     }
   }
 
-  /**
+   /**
    * Display a single product.
    * GET product/:id
    */

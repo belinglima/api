@@ -1,25 +1,27 @@
 const Route = use('Route')
 
-// rotas public
+// rotas publicas
 Route.post('/sessions', 'SessionController.create')
 Route.post('/user', 'UserController.store')
 
 Route
   .group(() => {
-    Route.resource('/order', 'OrderController').apiOnly()
-    Route.resource('/product', 'ProductController').apiOnly()
-    Route.resource('/category', 'CategoryController').apiOnly()
-    Route.resource('/user', 'UserController').apiOnly()
+    Route.resource('order', 'OrderController').apiOnly()
+    Route.resource('product', 'ProductController').apiOnly()
+    Route.resource('category', 'CategoryController').apiOnly()
+    Route.resource('user', 'UserController').apiOnly()
   }).prefix('auth').middleware(['auth'])
 
 Route
   .group(() => {
-    Route.post('/product/:id/images', 'ImageProductController.store')
     Route.post('/order/:id/addproduct', 'OrderController.product')
-    Route.get('/image/:path', 'ImageProductController.show')
+
+    Route.post('/product/:id/images', 'ImageProductController.store')
     Route.post('/category/:id/images', 'ImageCategoryController.store')
-    Route.get('/image/:path', 'ImageCategoryController.show')
     Route.post('/user/:id/images', 'ImageUserController.store')
+
+    Route.get('/image/:path', 'ImageProductController.show')
+    Route.get('/image/:path', 'ImageCategoryController.show')
     Route.get('/image/:path', 'ImageUserController.show')
   })
 
