@@ -1,6 +1,6 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
+const Env = use('Env')
 const Model = use('Model')
 
 class ImageCategory extends Model {
