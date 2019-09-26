@@ -15,7 +15,7 @@ class TokensSchema extends Schema {
   }
 
   down () {
-    this.dropIfExists('tokens')
+    this.drop('tokens')
   }
 }
 

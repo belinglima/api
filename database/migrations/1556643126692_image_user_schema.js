@@ -14,7 +14,7 @@ class ImageUserSchema extends Schema {
   }
 
   down () {
-    this.dropIfExists('image_users')
+    this.drop('image_users')
   }
 }
 

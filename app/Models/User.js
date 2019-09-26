@@ -26,19 +26,15 @@ class User extends Model {
    *
    * @return {Object}
    */
-  tokens() {
+  tokens () {
     return this.hasMany('App/Models/Token')
   }
 
-  order() {
+  order () {
     return this.hasMany('App/Models/Order')
   }
 
-  image() {
-    return this.hasMany('App/Models/ImageUser')
-  }
-  
-  images() {
+  image () {
     return this.hasMany('App/Models/ImageUser')
   }
 }
