@@ -15,7 +15,7 @@ class ImageUserController {
    * Create/save a new image.
    * POST images
    */
-  async store ({ params, request }) {
+  async store ({ params, request, response }) {
     const user = await User.findOrFail(params.id)
 
     const images = request.file('image', {
@@ -34,8 +34,13 @@ class ImageUserController {
     await Promise.all(
       images
         .movedList()
-        .map(image => User.images().create({ path: image.fileName }))
+        .map(image => user.images().create({ path: image.fileName }))
     )
+    
+     return response.status(201).json({
+      success: 'Upload Image User',
+      data: images
+    })
   }
 }
 

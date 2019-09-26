@@ -17,7 +17,7 @@ class OrderProductSchema extends Schema {
   }
 
   down () {
-    this.drop('OrderProducts')
+    this.dropIfExists('OrderProducts')
   }
 }
 

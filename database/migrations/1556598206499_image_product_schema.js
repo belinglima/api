@@ -14,7 +14,7 @@ class ImageProductSchema extends Schema {
   }
 
   down () {
-    this.drop('image_products')
+    this.dropIfExists('image_products')
   }
 }
 

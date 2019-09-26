@@ -1,4 +1,5 @@
 const User = use('App/Models/User')
+const Mail = use('Mail')
 
 /**
  * Resourceful controller for interacting with user
@@ -10,7 +11,7 @@ class UserController {
    */
   async index () {
     const user = User.query()
-      .with('image')
+      .with('images')
       .fetch()
     return user
   }
@@ -33,10 +34,17 @@ class UserController {
       "neighborhood",
     ])
     const user = await User.findOrCreate(data)
+    //const user = await User.all()
     if (user) {
       response.status(201).json({
         success: 'Created User',
         data: data
+      })
+      await Mail.send('emails.welcome', user.toJSON(), (message) => {
+        message
+          .to(user.email)
+          .from('pizzabreakapi@gmail.com', 'PizzaBreak')
+          .subject('Seja bem Vindo!')
       })
     } else {
       response.status(204).send({ error: 'User Not Created' })
@@ -49,7 +57,7 @@ class UserController {
    */
   async show ({ params }) {
     const user = await User.find(params.id)
-    await user.load('image')
+    await user.load('images')
     return user
   }
 
@@ -79,6 +87,12 @@ class UserController {
         data: data
       })
       await user.save()
+      await Mail.send('emails.atualizado', user.toJSON(), (message) => {
+        message
+          .to(user.email)
+          .from('pizzabreakapi@gmail.com', 'PizzaBreak')
+          .subject('Email Atualizado!')
+      })
     } else {
       response.status(304).send({ error: 'User Not Updated' })
     }
