@@ -6,9 +6,13 @@ class Order extends Model {
         return this.manyThrough('App/Models/User','order')
     }
 
-    products () {
-        return this.belongsToMany('App/Models/Product').pivotTable('OrderProducts')
+    product () {
+        return this.belongsToMany('App/Models/Product')
+        .pivotTable('OrderProducts')
+        .withPivot(['qtd', 'amount', 'obs'])
     }
+
+
 }
 
 module.exports = Order

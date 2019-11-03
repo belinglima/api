@@ -91,7 +91,7 @@ class UserController {
         message
           .to(user.email)
           .from('pizzabreakapi@gmail.com', 'PizzaBreak')
-          .subject('Email Atualizado!')
+          .subject('Dados Atualizados!')
       })
     } else {
       response.status(304).send({ error: 'User Not Updated' })

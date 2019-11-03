@@ -14,7 +14,7 @@ class ImageCategorySchema extends Schema {
   }
 
   down () {
-    this.drop('image_categories')
+    this.dropIfExists('image_categories')
   }
 }
 

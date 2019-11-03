@@ -30,7 +30,7 @@ class CategoryController {
     if (category) {
       response.status(201).json({
         success: 'Created Category',
-        data: data
+        id: category.id
       })
     } else {
       response.status(204).send({ error: 'Category Not Created' })
@@ -43,7 +43,7 @@ class CategoryController {
    */
   async show ({ params }) {
     const category = await Category.find(params.id)
-    await category.load('image')
+    await category.loadMany(['image','product'])
     return category
   }
 
@@ -61,7 +61,7 @@ class CategoryController {
     if (category) {
       response.status(200).json({
         success: 'Category Updated',
-        data: data
+        id: category.id
       })
       await category.save()
     } else {

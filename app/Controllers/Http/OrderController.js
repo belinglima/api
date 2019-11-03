@@ -10,7 +10,7 @@ class OrderController {
    */
   async index () {
     const order = Order.query()
-    .with('products')
+    .with('product')
     .fetch()
     return order
   }
@@ -45,7 +45,7 @@ class OrderController {
    */
   async show ({ params }) {
      const order = await Order.find(params.id)
-     await order.load('products')
+     await order.load('product')
     return order
   }
 
@@ -90,6 +90,21 @@ class OrderController {
        }else {
          response.status(404).send({ error: 'Order Not Found' })
        }
+  }
+
+  async cancel ({ params , request, response }){
+    const order = await Order.find(params.id)
+    const data = request.only([ "motivo", "status" ])
+     order.merge(data)
+    if (order) {
+      response.status(200).json({
+        success: 'Cancel success',
+        data: true
+      })
+      await order.save()
+    } else {
+      response.status(304).send({ error: 'Cancel Not authorized' })
+    }
   }
 }
 

@@ -31,7 +31,7 @@ class ProductController {
     if (product) {
       response.status(201).json({
         success: 'Created Product',
-        data: data
+        id: product.id
       })
     } else {
       response.status(204).send({ error: 'Product Not Created' })
@@ -65,7 +65,7 @@ class ProductController {
     if (product) {
       response.status(200).json({
         success: 'Product Updated',
-        data: data
+        id: product.id
       })
       await product.save()
     } else {

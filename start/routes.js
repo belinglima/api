@@ -8,8 +8,11 @@ Route.get('/image/:path', 'ImageProductController.show')
 Route.get('/image/:path', 'ImageCategoryController.show')
 Route.get('/image/:path', 'ImageUserController.show')
 
- // rota logica
- Route.post('/logica', 'LogicaController.index')
+ // rotas consulta
+ Route.post('/consultaUser', 'LogicaController.index')
+ Route.post('/consultaMais', 'LogicaController.maisVendidos')
+ Route.get('/ConsultaOferta', 'LogicaController.oferta')
+ Route.post('/ConsultaQuem', 'LogicaController.quem')
 
 // reset de senha
 Route.post('passwords', 'ForgotPasswordController.store')
@@ -46,7 +49,19 @@ Route
     Route.post('/product/:id/images', 'ImageProductController.store')
     Route.post('/category/:id/images', 'ImageCategoryController.store')
     Route.post('/user/:id/images', 'ImageUserController.store')
+
+     // canelamento de pedido(muda status e recebe motivo - canceled)  
+     // entrega de pedido(muda status somente - delivered)
+    Route.post('/order/:id', 'OrderController.cancel')
+
+    // rotas de abre fecha sistema
+     Route.put('/abrefecha/:id', 'LogicaController.abrefecha')
+     Route.get('/status/:id', 'LogicaController.status')
+     Route.get('/novos', 'LogicaController.novos')
+     Route.get('/contagem', 'LogicaController.contar')
+     Route.get('/mais', 'LogicaController.maisCompram')
 }).prefix('auth').middleware(['auth'])
+
 
 // rota public
 Route.get('/*', () => {

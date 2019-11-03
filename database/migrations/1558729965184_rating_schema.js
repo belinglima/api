@@ -19,7 +19,7 @@ class RatingSchema extends Schema {
   }
 
   down () {
-    this.drop('ratings')
+    this.dropIfExists('ratings')
   }
 }
 

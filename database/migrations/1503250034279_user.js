@@ -5,7 +5,7 @@ class UserSchema extends Schema {
     this.create('users', (table) => {
       table.increments()
       table.string('name', 80).notNullable()
-      table.string('cpf', 11).unique().nullable()
+      table.string('cpf', 14).unique().nullable()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.string('telephone', 20).nullable()
@@ -15,12 +15,14 @@ class UserSchema extends Schema {
       table.string('reference', 60).nullable()
       table.boolean('active').defaultTo(true)
       table.boolean('isAdmin').defaultTo(false)
+      table.string('token')
+      table.timestamp('token_created_at')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('users')
+    this.dropIfExists('users')
   }
 }
 

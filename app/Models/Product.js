@@ -11,7 +11,9 @@ class Product extends Model {
     }
 
     order () {
-        return this.belongsToMany('App/Models/Orders').pivotTable('OrderProducts')
+        return this.belongsToMany('App/Models/Order')
+        .pivotTable('OrderProducts')
+        .withPivot(['qtd', 'amount'])
     }
 }
 

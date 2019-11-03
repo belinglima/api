@@ -7,21 +7,21 @@ class ImageCategoryController {
     async store ({ params, request }) {
         const category = await Category.findOrFail(params.id)
       
-        const image = request.file('image', {
+        const images = request.file('image', {
           types: ['image'],
           size: '30mb'
         })
       
-        await image.moveAll(Helpers.tmpPath('uploads'), file => ({
+        await images.moveAll(Helpers.tmpPath('uploads'), file => ({
           name: `${Date.now()}-${file.clientName}`
         }))
       
-        if (!image.movedAll()) {
+        if (!images.movedAll()) {
           return image.errors()
         }
       
         await Promise.all(
-          image
+          images
             .movedList()
             .map(image => category.image().create({ path: image.fileName }))
         )
